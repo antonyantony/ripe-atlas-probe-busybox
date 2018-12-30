@@ -4,6 +4,10 @@ int validate_filename(const char *path, const char *prefix)
 {
 	size_t path_len, prefix_len;
 
+#if !FEATURE_ATLAS_VALID_PATH_CHECK
+	 return 1; /* disable path name checks. NOT on atlas porbes */
+#else 
+
 	/* Check for the following properties:
 	 * 1) path start with prefix
 	 * 2) the next character after prefix is a '/'
@@ -30,4 +34,5 @@ int validate_filename(const char *path, const char *prefix)
 		return 0;	/* property 4 */
 	
 	return 1;
+#endif
 }
