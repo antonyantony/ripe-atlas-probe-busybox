@@ -17,6 +17,21 @@
 //config:       default 10
 //config:       depends on EOOQD
 
+//config:config FEATURE_EOOQD_OUT_DIR
+//config:       string "EOOQD output directory"
+//config:       default "/home/atlas/data/out/ooq"
+//config:       depends on EOOQD
+//config:       help
+//config:         Location of EOOQD output
+
+//config:config FEATURE_EOOQD_NEW_PREFIX
+//config:       string "prefix for new EOOQD output file, the file is in use."
+//config:       default "/home/atlas/data/new/ooq"
+//config:       depends on EOOQD
+//config:       help
+//config:         Location of EOOQD work in progress files.
+
+
 //applet:IF_EOOQD(APPLET(eooqd, BB_DIR_BIN, BB_SUID_DROP))
 
 //kbuild:lib-$(CONFIG_EOOQD) += eooqd.o
@@ -39,8 +54,8 @@
 #include "eperd.h"
 
 #define SUFFIX 		".curr"
-#define OOQD_NEW_PREFIX	"/home/atlas/data/new/ooq"
-#define OOQD_OUT_PREFIX	"/home/atlas/data/out/ooq"
+#define OOQD_NEW_PREFIX	CONFIG_FEATURE_EOOQD_NEW_PREFIX
+#define OOQD_OUT_PREFIX	CONFIG_FEATURE_EOOQD_OUT_DIR
 #define ATLAS_SESSION_FILE	"/home/atlas/status/con_session_id.txt"
 
 #define ATLAS_NARGS	64	/* Max arguments to a built-in command */
